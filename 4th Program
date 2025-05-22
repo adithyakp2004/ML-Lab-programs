@@ -1,0 +1,21 @@
+Load and Explore CSV File: (1st part)
+import pandas as pd
+
+csv_data = pd.read_csv('train.csv')
+print("First few rows of CSV file:") 
+print(csv_data.head())
+print("\nSummary statistics of CSV file:") 
+print(csv_data.describe())
+print("\nInformation about columns in CSV file:") 
+print(csv_data.info())
+
+Load and Explore Excel File: (2nd part)
+import pandas as pd 
+import openpyxl as op
+excel_data = pd.read_excel('Sample-Superstore.xlsx', sheet_name='Orders')
+print("First few rows of Excel file:") 
+print(excel_data.head())
+print("\nSummary statistics of Excel file:") 
+print(excel_data.describe())
+print("\nInformation about columns in Excel file:") 
+print(excel_data.info())
