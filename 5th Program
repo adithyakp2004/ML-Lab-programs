@@ -1,5 +1,5 @@
 from sklearn.datasets import load_iris
-import pandas as pd, matplotlib.pyplot as plt, seaborn as sns
+import matplotlib.pyplot as plt, seaborn as sns
 
 df = load_iris(as_frame=True).frame
 
