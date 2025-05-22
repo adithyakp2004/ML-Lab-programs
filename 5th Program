@@ -1,22 +1,14 @@
-import matplotlib.pyplot as plt 
-import seaborn as sns
-from sklearn.datasets import load_iris 
-import pandas as pd
+from sklearn.datasets import load_iris
+import pandas as pd, matplotlib.pyplot as plt, seaborn as sns
 
-iris = load_iris()
-iris_df = pd.DataFrame(data=iris.data, columns=iris.feature_names) 
-iris_df['target'] = iris.target
-plt.figure(figsize=(8, 6))
-plt.scatter(iris_df['sepal length (cm)'], iris_df['sepal width (cm)'], c=iris_df['target'], cmap='viridis', s=80, alpha=0.7) 
-plt.xlabel('Sepal Length (cm)')
-plt.ylabel('Sepal Width (cm)')
-plt.title('Scatter Plot of Sepal Length vs Sepal Width') 
-plt.colorbar(label='Species')
+df = load_iris(as_frame=True).frame
+
+# Scatter plot
+plt.scatter(df['sepal length (cm)'], df['sepal width (cm)'], c=df['target'], cmap='viridis')
+plt.title('Sepal Length vs Width'), plt.colorbar()
 plt.show()
 
-plt.figure(figsize=(8, 6))
-sns.countplot(x='target', data=iris_df, palette='viridis') 
-plt.xlabel('Species')
-plt.ylabel('Count')
-plt.title('Bar Chart: Count of Each Species') 
+# Count plot
+sns.countplot(x='target', data=df)
+plt.title('Species Count')
 plt.show()
