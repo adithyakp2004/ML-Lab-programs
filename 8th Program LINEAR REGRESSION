@@ -13,7 +13,6 @@ r2=r2_score(y_test, predictions)
 print("Mean Squared Error (MSE):\n",mse) 
 print("R-squared:\n",r2)
 
-#(optional) 
 plt.scatter(X_test, y_test, color='blue') 
 plt.plot(X_test, predictions, color='red', linewidth=3) 
 plt.xlabel('X')
