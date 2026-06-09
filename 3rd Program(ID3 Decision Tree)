@@ -1,23 +1,41 @@
-from sklearn import tree
-from sklearn.preprocessing import LabelEncoder
 import pandas as pd
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.preprocessing import LabelEncoder
+import matplotlib.pyplot as plt
 
-data = pd.read_csv("playtennis.csv")
+# Sample Dataset
+data = {
+    'Outlook':['Sunny','Sunny','Overcast','Rain','Rain',
+               'Rain','Overcast','Sunny'],
+    'Temperature':['Hot','Hot','Hot','Mild','Cool',
+                   'Cool','Cool','Mild'],
+    'Play':['No','No','Yes','Yes','Yes',
+            'No','Yes','No']
+}
 
-X = data.iloc[:,:-1]
-y = data.iloc[:,-1]
+df = pd.DataFrame(data)
 
+# Encode categorical data
 le = LabelEncoder()
 
-for col in X.columns:
-    X[col] = le.fit_transform(X[col])
+for col in df.columns:
+    df[col] = le.fit_transform(df[col])
 
-y = le.fit_transform(y)
+X = df[['Outlook','Temperature']]
+y = df['Play']
 
-clf = tree.DecisionTreeClassifier(criterion="entropy")
+# Build Decision Tree
+clf = DecisionTreeClassifier(criterion='entropy')
 clf.fit(X,y)
 
-sample = [[0,2,0,1]]   # Example input
-pred = clf.predict(sample)
+# Display Tree
+plt.figure(figsize=(8,6))
+plot_tree(clf,
+          feature_names=['Outlook','Temperature'],
+          class_names=['No','Yes'],
+          filled=True)
+plt.show()
 
-print("Prediction:", pred)
+# Predict New Sample
+sample = [[2,1]]      # Example values
+print("Prediction:", clf.predict(sample))
