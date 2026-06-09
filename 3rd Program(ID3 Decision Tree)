@@ -1,0 +1,23 @@
+from sklearn import tree
+from sklearn.preprocessing import LabelEncoder
+import pandas as pd
+
+data = pd.read_csv("playtennis.csv")
+
+X = data.iloc[:,:-1]
+y = data.iloc[:,-1]
+
+le = LabelEncoder()
+
+for col in X.columns:
+    X[col] = le.fit_transform(X[col])
+
+y = le.fit_transform(y)
+
+clf = tree.DecisionTreeClassifier(criterion="entropy")
+clf.fit(X,y)
+
+sample = [[0,2,0,1]]   # Example input
+pred = clf.predict(sample)
+
+print("Prediction:", pred)
