@@ -1,0 +1,15 @@
+import csv
+
+data = list(csv.reader(open("training_data.csv")))
+h = None
+
+for row in data[1:]:
+    if row[-1] == "Yes":
+        if h is None:
+            h = row[:-1]
+        else:
+            for i in range(len(h)):
+                if h[i] != row[i]:
+                    h[i] = '?'
+
+print("Most Specific Hypothesis:", h)
