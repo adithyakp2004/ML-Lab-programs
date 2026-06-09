@@ -1,6 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error,mean_squared_error,r2_score
+import numpy as np
 
 data = pd.read_csv("data.csv")
 
@@ -12,10 +14,21 @@ model.fit(X,y)
 
 pred = model.predict(X)
 
-residuals = y - pred
-
-plt.scatter(pred,residuals)
-plt.axhline(y=0)
-plt.xlabel("Predicted")
-plt.ylabel("Residuals")
+# Scatter Plot + Regression Line
+plt.scatter(X,y)
+plt.plot(X,pred,'r')
+plt.title("Regression Line")
 plt.show()
+
+# Residual Plot
+residuals = y - pred
+plt.scatter(pred,residuals)
+plt.axhline(y=0,color='r')
+plt.title("Residual Plot")
+plt.show()
+
+# Evaluation Metrics
+print("MAE =", mean_absolute_error(y,pred))
+print("MSE =", mean_squared_error(y,pred))
+print("RMSE =", np.sqrt(mean_squared_error(y,pred)))
+print("R2 Score =", r2_score(y,pred))
