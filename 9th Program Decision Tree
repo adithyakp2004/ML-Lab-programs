@@ -1,11 +1,38 @@
-from sklearn.datasets import load_iris
-from sklearn.tree import DecisionTreeClassifier, plot_tree
+import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
 
-iris = load_iris()
-clf = DecisionTreeClassifier().fit(iris.data, iris.target)
+# Read data from CSV
+df = pd.read_csv("data.csv")
 
-plt.figure(figsize=(12, 8))
-plot_tree(clf, feature_names=iris.feature_names, class_names=iris.target_names.astype(str), filled=True)
-plt.title("Decision Tree Visualization")
+# K-Means Clustering
+kmeans = KMeans(n_clusters=2, random_state=0)
+kmeans.fit(df)
+
+# Cluster labels
+labels = kmeans.labels_
+
+# Centroids
+centroids = kmeans.cluster_centers_
+
+# Plot clusters
+plt.scatter(df['Variable1'],
+            df['Variable2'],
+            c=labels,
+            s=100)
+
+# Plot centroids
+plt.scatter(centroids[:,0],
+            centroids[:,1],
+            marker='X',
+            color='red',
+            s=200,
+            label='Centroids')
+
+plt.xlabel("Variable 1")
+plt.ylabel("Variable 2")
+plt.title("K-Means Clustering")
+plt.legend()
+plt.grid(True)
+plt.title("K-means Clustering")
 plt.show()
