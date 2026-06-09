@@ -1,19 +1,59 @@
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
+import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
 
-iris = load_iris()
+# Sample Data
+data = {
+    'Height':[160,165,170,175,180,185],
+    'Weight':[50,55,60,75,80,90],
+    'Sport':['Basketball','Basketball','Basketball',
+             'Football','Football','Football']
+}
 
-X_train,X_test,y_train,y_test = train_test_split(
-    iris.data,iris.target,test_size=0.3,random_state=1)
+# DataFrame
+df = pd.DataFrame(data)
 
+# Features and Target
+X = df[['Height','Weight']]
+y = df['Sport']
+
+# Train KNN
 knn = KNeighborsClassifier(n_neighbors=3)
-knn.fit(X_train,y_train)
+knn.fit(X,y)
 
-pred = knn.predict(X_test)
+# New Person
+new_person = [[172,65]]
 
-for i in range(len(pred)):
-    if pred[i] == y_test[i]:
-        print("Correct", pred[i])
-    else:
-        print("Wrong Predicted:", pred[i], "Actual:", y_test[i])
+# Prediction
+prediction = knn.predict(new_person)
+
+# Plot Basketball Players
+basketball = df[df['Sport']=='Basketball']
+plt.scatter(basketball['Height'],
+            basketball['Weight'],
+            color='blue',
+            label='Basketball')
+
+# Plot Football Players
+football = df[df['Sport']=='Football']
+plt.scatter(football['Height'],
+            football['Weight'],
+            color='green',
+            label='Football')
+
+# Plot New Person
+plt.scatter(172,65,
+            color='red',
+            marker='*',
+            s=200,
+            label='New Person')
+
+plt.xlabel('Height (cm)')
+plt.ylabel('Weight (kg)')
+plt.title('K-NN Classification of Sport')
+plt.legend()
+plt.grid(True)
+
+plt.show()
+
+print("Predicted Sport:", prediction[0])
