@@ -1,0 +1,9 @@
+import statistics as s
+
+data = [10,20,30,40,50]
+
+print("Mean =", s.mean(data))
+print("Median =", s.median(data))
+print("Mode =", s.mode(data))
+print("Variance =", s.variance(data))
+print("Std Dev =", s.stdev(data))
