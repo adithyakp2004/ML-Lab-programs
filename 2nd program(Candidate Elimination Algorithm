@@ -1,0 +1,25 @@
+import pandas as pd
+
+data = pd.read_csv("data.csv")
+concepts = data.iloc[:,:-1].values
+target = data.iloc[:,-1].values
+
+S = concepts[0].copy()
+G = [["?" for _ in range(len(S))]]
+
+for i, h in enumerate(concepts):
+    if target[i] == "Yes":
+        for x in range(len(S)):
+            if h[x] != S[x]:
+                S[x] = "?"
+                G[0][x] = "?"
+    else:
+        for x in range(len(S)):
+            if h[x] != S[x]:
+                G.append(["?" for _ in range(len(S))])
+                G[-1][x] = S[x]
+
+print("Specific Hypothesis:", S)
+print("General Hypothesis:")
+for g in G:
+    print(g)
