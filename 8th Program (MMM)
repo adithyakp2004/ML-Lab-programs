@@ -1,9 +1,21 @@
-import statistics as s
+import pandas as pd
 
-data = [10,20,30,40,50]
+# Sample Data
+data = {
+    'Marks':[45,56,67,78,89,45,67,78,90,56]
+}
 
-print("Mean =", s.mean(data))
-print("Median =", s.median(data))
-print("Mode =", s.mode(data))
-print("Variance =", s.variance(data))
-print("Std Dev =", s.stdev(data))
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+print("DataFrame")
+print(df)
+
+print("\nSummary Statistics")
+print(df.describe())
+
+print("\nMean =", df['Marks'].mean())
+print("Median =", df['Marks'].median())
+print("Mode =", df['Marks'].mode()[0])
+print("Variance =", df['Marks'].var())
+print("Standard Deviation =", df['Marks'].std())
