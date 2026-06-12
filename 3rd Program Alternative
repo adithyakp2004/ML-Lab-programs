@@ -18,10 +18,7 @@ clf.fit(X, y)
 
 # Display Tree
 plt.figure(figsize=(12,8))
-plot_tree(clf,
-          feature_names=iris.feature_names,
-          class_names=iris.target_names,
-          filled=True)
+plot_tree(clf,feature_names=iris.feature_names,class_names=iris.target_names.tolist(),filled=True)
 
 plt.show()
 
