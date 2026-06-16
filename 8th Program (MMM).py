@@ -1,11 +1,9 @@
 import pandas as pd
 
-# Sample Data
 data = {
     'Marks':[45,56,67,78,89,45,67,78,90,56]
 }
 
-# Convert to DataFrame
 df = pd.DataFrame(data)
 
 print("DataFrame")
