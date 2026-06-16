@@ -2,11 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
-data = pd.read_csv("data.csv")
+data = pd.read_csv("dataset2.csv")
 
 X = data[['Hours','Marks']]
 
-model = KMeans(n_clusters=2, random_state=0)
+model = KMeans(n_clusters=2)
 model.fit(X)
 
 labels = model.labels_
