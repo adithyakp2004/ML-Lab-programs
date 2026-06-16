@@ -1,0 +1,7 @@
+Weather,Temp,Result
+Sunny,Hot,No
+Sunny,Mild,No
+Rain,Hot,Yes
+Rain,Mild,Yes
+Rain,Cool,Yes
+Sunny,Cool,No
