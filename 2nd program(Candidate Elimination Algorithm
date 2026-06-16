@@ -1,25 +1,19 @@
 import pandas as pd
 
-data = pd.read_csv("data.csv")
-concepts = data.iloc[:,:-1].values
-target = data.iloc[:,-1].values
+data = pd.read_csv("dataset1.csv")
 
-S = concepts[0].copy()
-G = [["?" for _ in range(len(S))]]
+features = data[['Weather','Temp']].values
+labels = data['Result'].values
 
-for i, h in enumerate(concepts):
-    if target[i] == "Yes":
-        for x in range(len(S)):
-            if h[x] != S[x]:
-                S[x] = "?"
-                G[0][x] = "?"
-    else:
-        for x in range(len(S)):
-            if h[x] != S[x]:
-                G.append(["?" for _ in range(len(S))])
-                G[-1][x] = S[x]
+specific = features[labels=="Yes"][0]
 
-print("Specific Hypothesis:", S)
+for f in features[labels=="Yes"]:
+specific = [specific[i] if specific[i]==f[i] else "?"
+for i in range(len(f))]
+
+print("Specific Hypothesis:", specific)
+
 print("General Hypothesis:")
-for g in G:
-    print(g)
+for f in features[labels=="No"]:
+print([specific[i] if f[i]!=specific[i] else "?"
+for i in range(len(f))])
